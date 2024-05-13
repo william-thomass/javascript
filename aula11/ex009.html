@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex 09</title>
+</head>
+<body>
+    <h1>Qual seu Pais?</h1>
+    <input type="text" id="pais">
+    <input type="button" value="Enviar" onclick="res()">
+    <div id="res"></div>
+
+    <script>
+        function res(){
+
+        var xpais = window.document.getElementById('pais')
+        var xres = window.document.getElementById('res')
+        var ires = (xpais.value)
+        
+        
+        xres.innerHTML = `Vivendo em ${ires} `
+        if(ires == 'BRASIL'){
+            xres.innerHTML += 'Você é brasileiro'
+        }else {
+            xres.innerHTML += 'Você é estrangeiro'
+        }
+
+        }
+
+    </script>
+</body>
+</html>

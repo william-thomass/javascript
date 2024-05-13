@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+</head>
+<body>
+    <h1>Quiz</h1>
+    <div id="question"></div>
+    <div id="options"></div>
+    <button onclick="nextQuestion()">Próxima Pergunta</button>
+    <p id="score">Pontuação: 0</p>
+
+    <script>
+        // Definindo as perguntas e respostas
+        var questions = [
+            {
+                question: "Qual é a capital do Brasil?",
+                options: ["Rio de Janeiro", "São Paulo", "Brasília", "Salvador"],
+                answer: "Brasília"
+            },
+            {
+                question: "Quem escreveu 'Dom Quixote'?",
+                options: ["Miguel de Cervantes", "William Shakespeare", "Friedrich Nietzsche", "Jorge Luis Borges"],
+                answer: "Miguel de Cervantes"
+            },
+            {
+                question: "Quantos planetas existem no sistema solar?",
+                options: ["7", "8", "9", "10"],
+                answer: "8"
+            }
+        ];
+
+        var currentQuestion = 0;
+        var score = 0;
+
+        // Função para exibir a próxima pergunta
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                displayQuestion();
+            } else {
+                endQuiz();
+            }
+        }
+
+        // Função para exibir a pergunta atual
+        function displayQuestion() {
+            var questionDiv = document.getElementById("question");
+            var optionsDiv = document.getElementById("options");
+            var scoreDisplay = document.getElementById("score");
+            
+            questionDiv.innerHTML = questions[currentQuestion].question;
+
+            // Limpar opções anteriores
+            optionsDiv.innerHTML = "";
+
+            // Exibir opções
+            for (var i = 0; i < questions[currentQuestion].options.length; i++) {
+                var option = document.createElement("button");
+                option.innerHTML = questions[currentQuestion].options[i];
+                option.onclick = function() {
+                    checkAnswer(this.innerHTML);
+                };
+                optionsDiv.appendChild(option);
+            }
+
+            scoreDisplay.innerHTML = "Pontuação: " + score;
+        }
+
+        // Função para verificar a resposta
+        function checkAnswer(userAnswer) {
+            if (userAnswer === questions[currentQuestion].answer) {
+                score++;
+                alert("Resposta correta!");
+            } else {
+                alert("Resposta incorreta. A resposta correta é: " + questions[currentQuestion].answer);
+            }
+
+            nextQuestion();
+        }
+
+        // Função para finalizar o quiz
+        function endQuiz() {
+            alert("Quiz encerrado! Sua pontuação final é: " + score);
+            // Pode adicionar mais lógica aqui, como reiniciar o jogo, exibir uma tabela de classificação, etc.
+        }
+
+        // Iniciar o jogo exibindo a primeira pergunta
+        displayQuestion();
+    </script>
+</body>
+</html>
